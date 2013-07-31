@@ -34,6 +34,7 @@ void setup()
   Serial.begin(9600);
   
   // Splash screen
+  
   Serial.println("ANEMOMETER");
   Serial.println("**********");
   Serial.println("Based on NRG #40C ANEMOMETER Modified with a Hall Effect Sensor 2 pulse per 1 RPM");
