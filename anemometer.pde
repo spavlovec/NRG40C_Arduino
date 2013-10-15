@@ -4,8 +4,9 @@ Changed to Hall Effect 10/2012
 * version: 1.0   20100823
 * Wind speed information: http://en.wikipedia.org/wiki/Beaufort_scale
 */
-
-
+#include "Wire.h"
+#include "Adafruit_BMP085.h"
+ 
 // Pin definitions
 # define ANEMOMETER 2                 // Receive the data from sensor
 
@@ -23,9 +24,11 @@ unsigned int RPM = 0;          // Revolutions per minute
 float speedwind = 0;           // Wind speed (m/s)
 unsigned short windforce = 0;  // Beaufort Wind Force Scale
 
+Adafruit_BMP085 bmp;
 
 void setup()
 {
+  bmp.begin();
   // Set the pins
   pinMode(2, INPUT);
   digitalWrite(2, HIGH);
@@ -68,7 +71,14 @@ void loop()
   Serial.print(" - ");
   Serial.println(winds[windforce]);
   Serial.println();
-  delay(10000);
+    Serial.print("Temperature = ");
+    Serial.print(bmp.readTemperature());
+    Serial.println(" *C");
+    Serial.print("Pressure = ");
+    Serial.print(bmp.readPressure());
+    Serial.println(" Pa");
+    Serial.println();
+  delay(10000);  
 }
 
 // Measure wind speed
